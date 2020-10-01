@@ -1,0 +1,19 @@
+---
+
+- name:  Update Packages and Caches for RHEL and Debian Variety Hosts
+  hosts: all
+  strategy: free
+  gather_facts: false
+  tasks:
+  - name: Update cache and upgrade all packages
+    yum:
+      name: '*'
+      state: latest
+    when: ansible_distribution_file_variety == "RedHat"
+
+  - name: Update cache and upgrade apt packages
+    apt:
+      upgrade: yes
+      update_cache: yes
+    when: ansible_distribution_file_variety == "Debian"
+...

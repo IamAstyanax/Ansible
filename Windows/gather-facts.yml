@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: False
+  tasks:
+    - name: Collect only facts returned by facter
+      setup:
+        gather_subset:
+          - '!all'
+          - '!any'
+          - facter
+      async: '{{ async_timeout|default(300) }}'
+      poll: '{{ async_poll|default(10) }}'
