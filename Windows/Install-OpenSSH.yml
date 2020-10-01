@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+
+  - name: Manage OpenSSH
+    win_chocolatey:
+      Name: openssh
+      state: present
+
+  - name: Run Install Script
+    win_command: powershell.exe -ExecutionPolicy ByPass -File "C:\program files\OpenSSH-Win64\install-sshd.ps1"
+
+  - name: Run remote PowerShell Script
+    win_command: sc config "sshd" start=auto
+
+  - name: Run remote PowerShell Script
+    win_command: sc start "sshd"

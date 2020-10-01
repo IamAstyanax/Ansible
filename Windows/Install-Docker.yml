@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+
+  - name: Manage Docker Desktop
+    win_chocolatey:
+      Name: docker-desktop
+      state: present
